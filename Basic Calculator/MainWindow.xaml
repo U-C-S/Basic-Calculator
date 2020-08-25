@@ -4,26 +4,54 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Calculator" Height="360" Width="235">
-    <Grid Margin="1,1,1,1">
-        <Button Content="1" HorizontalAlignment="Left" Margin="10,179,0,0" VerticalAlignment="Top" Width="65" Height="30" Click="Click_1" Background="#FF96B6D4"/>
-        <Button Content="2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="80,179,0,0" Height="30" Click="Click_2" Background="#FF96B6D4"/>
-        <Button Content="3" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="150,179,0,0" Height="30" Click="Click_3" Background="#FF96B6D4"/>
-        <Button Content="4" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="10,214,0,0" Height="30" Click="Click_4" Background="#FF96B6D4"/>
-        <Button Content="5" HorizontalAlignment="Left" Margin="80,214,0,0" VerticalAlignment="Top" Width="65" Height="30" Click="Click_5" Background="#FF96B6D4"/>
-        <Button Content="6" HorizontalAlignment="Left" Margin="150,214,0,0" VerticalAlignment="Top" Width="65" Height="30" Click="Click_6" Background="#FF96B6D4"/>
-        <Button Content="7" HorizontalAlignment="Left" Margin="10,249,0,0" VerticalAlignment="Top" Width="65" Height="30" Click="Click_7" Background="#FF96B6D4"/>
-        <Button Content="8" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="80,249,0,0" Height="30" Click="Click_8" Background="#FF96B6D4"/>
-        <Button Content="9" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="150,249,0,0" Height="30" Click="Click_9" Background="#FF96B6D4"/>
-        <Button Content="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Height="30" Margin="80,284,0,0" Click="Click_0" Background="#FF96B6D4"/>
-        <Button Content="-" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top" Width="65" Height="30" Background="#FFC0DA80" Click="Subraction"/>
-        <Button Content="+" HorizontalAlignment="Left" Margin="80,134,0,0" VerticalAlignment="Top" Width="65" Height="30" Background="#FFC0DA80" Click="Addition"/>
-        <Button Content="Clear" HorizontalAlignment="Left" Margin="150,134,0,0" VerticalAlignment="Top" Width="65" Height="30" Click="Clear_Click"/>
-        <Button Content="/" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="10,99,0,0" Height="30" Click="divison" Background="#FFC0DA80"/>
-        <Button Content="x" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Height="30" Margin="80,99,0,0" Background="#FFC0DA80" Click="Multiply"/>
-        <Button Content="back" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Height="30" Margin="150,99,0,0"/>
-        <Button Content="." HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Height="30" Margin="10,284,0,0" Click="Click_dot"/>
-        <Button Content="=" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Height="30" Margin="150,284,0,0" Background="#ff1439" Foreground="White" Click="Equal"/>
-        <TextBox Name="textboxx" IsReadOnly="True" HorizontalAlignment="Left" Height="78" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="205" Margin="10,10,0,0" Background="White" FontSize="20" FontStyle="Italic" BorderThickness="3" BorderBrush="Black"/>
+        Title="Calculator" Height="340" Width="300" 
+        ResizeMode="NoResize" WindowStyle="None" Background="#BF000000" AllowsTransparency="True"
+        BorderThickness="2,2,2,2" BorderBrush="#FFBD1515" UseLayoutRounding="True">
+    <Window.Resources>
+        <Style x:Key = "btn" TargetType = "Button">
+            <Setter Property = "Height" Value = "35"/>
+            <Setter Property = "Width" Value = "65"/>
+            <Setter Property = "FontSize" Value = "12"/>
+            <Setter Property="HorizontalAlignment" Value ="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Label Content="Basic-Calculator" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Foreground="#FFFF1439" FontSize="16" FontStyle="Normal" FontWeight="Normal" Height="35" Cursor="Arrow"/>
+        <TextBox x:Name="boxMain" HorizontalAlignment="Center" Margin="0,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Height="18" IsReadOnly="True" FontSize="12"/>
+        <TextBox Text="0" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,68,0,0" Width="250" Height="34" FontSize="18"/>
+
+        <Button Content="1" Style="{StaticResource btn}" Margin="11,171,0,0" Background="#CC8EEDC2" Foreground="White" BorderBrush="{x:Null}"/>
+        <Button Content="2" Style="{StaticResource btn}" Margin="81,171,0,0" Background="#CC8EEDC2" Foreground="White" BorderBrush="{x:Null}"/>
+        <Button Content="3" Style="{StaticResource btn}" Margin="151,171,0,0" Background="#CC8EEDC2" Foreground="White" BorderBrush="{x:Null}"/>
+        <Button Content="4" Style="{StaticResource btn}" Margin="11,211,0,0" Background="#CC8EEDC2" Foreground="White" BorderBrush="{x:Null}"/>
+        <Button Content="5" Style="{StaticResource btn}" Margin="81,211,0,0" Background="#CC8EEDC2" Foreground="White" BorderBrush="{x:Null}"/>
+        <Button Content="6" Style="{StaticResource btn}" Margin="151,211,0,0" Background="#CC8EEDC2" Foreground="White" BorderBrush="{x:Null}"/>
+        <Button Content="7" Style="{StaticResource btn}" Margin="11,251,0,0" Background="#CC8EEDC2" Foreground="White" BorderBrush="{x:Null}"/>
+        <Button Content="8" Style="{StaticResource btn}" Margin="81,251,0,0" Background="#CC8EEDC2" Foreground="White" BorderBrush="{x:Null}"/>
+        <Button Content="9" Style="{StaticResource btn}" Margin="151,251,0,0" Background="#CC8EEDC2" Foreground="White" BorderBrush="{x:Null}"/>
+        <Button Content="0" Style="{StaticResource btn}" Margin="81,291,0,0" Background="#CC8EEDC2" Foreground="White" BorderBrush="{x:Null}"/>
+        <Button Content="." Style="{StaticResource btn}" Margin="11,291,0,0"/>
+        <Button Content="=" Style="{StaticResource btn}" Margin="151,291,0,0" BorderBrush="{x:Null}" Background="#CCFF1439" Foreground="#7FFFFFFF"/>
+        <Button Content="Clear" Style="{StaticResource btn}" Margin="151,130,0,0"/>
+        <Button Content="+" Style="{StaticResource btn}" Margin="221,171,0,0" BorderBrush="{x:Null}" Background="#CCFFD75D"/>
+        <Button Content="-" Style="{StaticResource btn}" Margin="221,211,0,0" BorderBrush="{x:Null}" Background="#CCFFD75D"/>
+        <Button Content="Back" Style="{StaticResource btn}" Margin="221,130,0,0"/>
+        <Button Content="x" Style="{StaticResource btn}" Margin="221,251,0,0" BorderBrush="{x:Null}" Background="#CCFFD75D"/>
+        <Button Content="/" Style="{StaticResource btn}" Margin="221,291,0,0" BorderBrush="{x:Null}" Background="#CCFFD75D"/>
+        <Rectangle Height="35" VerticalAlignment="Top" MouseDown="Draggable">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#99FF0000"/>
+                    <GradientStop Color="#4C000000" Offset="0.583"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Button Content="" Width="20" Height="20" Margin="267,6,10,311" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Close" IsCancel="True">
+            <Button.Background>
+                <ImageBrush ImageSource="close_btn.png"/>
+            </Button.Background>
+        </Button>
+
     </Grid>
 </Window>
