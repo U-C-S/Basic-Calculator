@@ -15,8 +15,11 @@
             <Setter Property="HorizontalAlignment" Value ="Left"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
             <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="Padding" Value="0,0,0,0"/>
         </Style>
+
     </Window.Resources>
+
     <Grid>
         <Label Content="Basic-Calculator" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Foreground="White" FontSize="16" FontStyle="Normal" FontWeight="Normal" Height="35" Background="{x:Null}"/>
         <TextBox x:Name="boxMain" HorizontalAlignment="Center" Margin="0,50,0,0" TextWrapping="Wrap" HorizontalScrollBarVisibility="Visible" VerticalAlignment="Top" Width="270" Height="18" IsReadOnly="True" FontSize="12" Background="#33000000" Foreground="White" BorderBrush="{x:Null}"/>
@@ -32,15 +35,15 @@
         <Button Content="8" Click="Btn_num" Style="{StaticResource btn}" Margin="81,251,0,0" Background="#CC6DCFD9" Foreground="White"/>
         <Button Content="9" Click="Btn_num" Style="{StaticResource btn}" Margin="151,251,0,0" Background="#CC6DCFD9" Foreground="White"/>
         <Button Content="0" Click="Btn_num" Style="{StaticResource btn}" Margin="81,291,0,0" Background="#CC6DCFD9" Foreground="White"/>
-        <Button Content="." Click="Btn_num" Style="{StaticResource btn}" Margin="11,291,0,0"/>
-        <Button Content="=" Style="{StaticResource btn}" Margin="221,131,0,0"  Background="#CCFF1439" Foreground="#7FFFFFFF" IsDefault="True"/>
+        <Button Content="." Click="Btn_dot" Style="{StaticResource btn}" Margin="11,291,0,0"/>
+        <Button Content="=" Click="Btn_equal" Style="{StaticResource btn}" Margin="221,131,0,0"  Background="#CCFF1439" Foreground="#7FFFFFFF" IsDefault="True"/>
         <Button Content="Clear" Click="Clear" Style="{StaticResource btn}" Margin="81,131,0,0"/>
         <Button Content="+" Click="Operator" Style="{StaticResource btn}" Margin="221,171,0,0"  Background="#CCDDE76C"/>
         <Button Content="-" Click="Operator" Style="{StaticResource btn}" Margin="221,211,0,0"  Background="#CCDDE76C"/>
         <Button Content="Back" Click="Back" Style="{StaticResource btn}" Margin="151,131,0,0"/>
         <Button Content="x" Click="Operator" Style="{StaticResource btn}" Margin="221,251,0,0"  Background="#CCDDE76C"/>
         <Button Content="/" Click="Operator" Style="{StaticResource btn}" Margin="221,291,0,0"  Background="#CCDDE76C"/>
-        <Rectangle Height="35" VerticalAlignment="Top" MouseDown="Draggable">
+        <Rectangle Height="35" VerticalAlignment="Top" MouseLeftButtonDown="Draggable">
             <Rectangle.Fill>
                 <RadialGradientBrush>
                     <GradientStop Color="#99FF0000" Offset="0.2"/>
