@@ -27,7 +27,6 @@ namespace Basic_Calculator
         public bool operAtTheEnd = false;
         private float num1 = 0, num2 = 0, result;
         private int numOp = 0;
-        private string CrOp;
 
         private void Draggable(object sender, RoutedEventArgs e) => this.DragMove();
         private void Close(object sender, RoutedEventArgs e) => this.Close();
@@ -43,22 +42,6 @@ namespace Basic_Calculator
             {
                 boxResult.Text += btn.Content.ToString();
             }
-
-            //test
-            /*
-            if(num1 == 0)
-            {
-                num1 = int.Parse(btn.Content.ToString());
-            }
-            else if (boxResult.Text.Contains("."))
-            {
-                num1 = num1 + 0.1F;
-            }
-            else
-            {
-                num1 = (num1 * 10) + int.Parse(btn.Content.ToString());
-            }
-            */
         }
         private void Btn_dot(object sender, RoutedEventArgs e)
         {
@@ -69,29 +52,29 @@ namespace Basic_Calculator
             
         }
 
+        //Calculation logic
         private void Operator(object sender, RoutedEventArgs e)
         {
-            numOp += 1;
             Button oper = (Button)sender;
-            OperAtEnd(oper.Content.ToString());
-            if (numOp >= 2 && num2 == 0)
+            string opera;
+
+            if (numOp == 0)
+            {
+                opera = oper.Content.ToString();
+                num1 = float.Parse(boxResult.Text);
+                OperAtEnd(opera);
+            }
+            else
             {
                 num2 = float.Parse(boxResult.Text);
-            }
-            if (num1 == 0)
-            {
-                num1 = float.Parse(boxResult.Text);
-                CrOp = oper.Content.ToString();
-            }
-            
-            if(numOp >= 2)
-            {
-                num1 = cal(num1, CrOp, num2);
+                num1 = Cal(num1, opera, num2);
                 boxResult.Text = $"{num1}";
             }
+
+            numOp += 1;
         }
 
-        private float cal(float x, string a, float y)
+        private float Cal(float x, string a, float y)
         {
             switch (a)
             {
@@ -108,10 +91,12 @@ namespace Basic_Calculator
                     result = x / y;
                     break;
                 default:
+                    boxResult.Text = "Error";
                     break;
             }
             return result;
         }
+
         private void OperAtEnd(string x)
         {
             if(boxMain.Text == "" && boxResult.Text == "0")
@@ -122,49 +107,33 @@ namespace Basic_Calculator
             {
                 boxMain.Text = boxMain.Text.Substring(0, boxMain.Text.Length - 1) + x;
             }
+            else if (boxMain.Text.EndsWith(" "))
+            {
+                boxMain.Text = $"{num1} {x}";
+            }
             else
             {
                 boxMain.Text += $" {boxResult.Text} {x}";
                // boxResult.Text = "0";
             }
         }
+
+
         private void Btn_equal(object sender, RoutedEventArgs e)
         {
-            boxMain.Text += boxResult.Text;
-            /*
-            int si = boxMain.Text.IndexOf("+");
-            string a = boxMain.Text.Substring(0, si - 2);
-            string o = boxMain.Text.Substring(si,si+1);
-            string b = boxMain.Text.Substring(si + 3,si+4);
-
-            switch (o)
-            {
-                case "+ " :
-                    boxResult.Text = $"{float.Parse(a) + float.Parse(b)}";
-                    break;
-                case " -" :
-                    boxResult.Text = $"{float.Parse(a) - float.Parse(b)}";
-                    break;
-                case " x":
-                    boxResult.Text = $"{float.Parse(a) * float.Parse(b)}";
-                    break;
-                case " /":
-                    boxResult.Text = $"{float.Parse(a) / float.Parse(b)}";
-                    break;
-                default:
-                    boxResult.Text = "Error";
-                    break;
-            }
-            */
+            boxMain.Text += $" {boxResult.Text}";
+            
         }
 
         private void Clear(object sender, RoutedEventArgs e)
         {
             num1 = 0;
+            numOp = 0;
             num2 = 0;
             result = 0;
             boxMain.Text = "";
             boxResult.Text = "0";
+            InitializeComponent();
         }
 
         private void Back(object sender, RoutedEventArgs e)
