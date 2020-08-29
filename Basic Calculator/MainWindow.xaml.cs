@@ -163,14 +163,7 @@ namespace Basic_Calculator
         }
 
 
-
-        /*
-        private void UserLoad(object sender, RoutedEventArgs e)
-        {
-            var window = Window.GetWindow(this);
-            window.KeyDown += Num1;
-        }*/
-
+        //For Keyboard Functionality
         private void Num1(object sender, KeyEventArgs e)
         {
             switch(e.Key)
