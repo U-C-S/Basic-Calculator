@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -106,7 +107,8 @@ namespace Basic_Calculator
             else if ((boxMain.Text.EndsWith("+") || boxMain.Text.EndsWith("-") || boxMain.Text.EndsWith("x") || boxMain.Text.EndsWith("/")) && boxResult.Text == "0")
             {
                 boxMain.Text = boxMain.Text.Substring(0, boxMain.Text.Length - 1) + x;
-
+                numOp -= 1;
+                operStore[numOp] = x;
             }
             else if (boxMain.Text.EndsWith(" "))
             {
@@ -120,10 +122,22 @@ namespace Basic_Calculator
 
         private void Btn_equal(object sender, RoutedEventArgs e)
         {
-            float num1 = float.Parse(boxResult.Text);
-            boxMain.Text += $" {boxResult.Text} ";
-            TheResult = Cal(TheResult, operStore[numOp - 1], num1);
-            boxResult.Text = $"{TheResult}";
+            if(numOp > 0)
+            {
+                float num1 = float.Parse(boxResult.Text);
+                boxMain.Text += $" {boxResult.Text} ";
+                TheResult = Cal(TheResult, operStore[numOp - 1], num1);
+                boxResult.Text = $"{TheResult}";
+            }
+            else
+            {
+                boxResult.Text = boxResult.Text;
+            }
+
+            numOp = 0;
+            TheResult = 0;
+            boxMain.Text = "";
+            operStore.Clear();
         }
 
         private void Clear(object sender, RoutedEventArgs e)
@@ -148,5 +162,129 @@ namespace Basic_Calculator
             }
         }
 
+
+
+        /*
+        private void UserLoad(object sender, RoutedEventArgs e)
+        {
+            var window = Window.GetWindow(this);
+            window.KeyDown += Num1;
+        }*/
+
+        private void Num1(object sender, KeyEventArgs e)
+        {
+            switch(e.Key)
+            {
+                case Key.NumPad1:
+                    PressedKey_Num("1");
+                    break;
+                case Key.NumPad2:
+                    PressedKey_Num("2");
+                    break;
+                case Key.NumPad3:
+                    PressedKey_Num("3");
+                    break;
+                case Key.NumPad4:
+                    PressedKey_Num("4");
+                    break;
+                case Key.NumPad5:
+                    PressedKey_Num("5");
+                    break;
+                case Key.NumPad6:
+                    PressedKey_Num("6");
+                    break;
+                case Key.NumPad7:
+                    PressedKey_Num("7");
+                    break;
+                case Key.NumPad8:
+                    PressedKey_Num("8");
+                    break;
+                case Key.NumPad9:
+                    PressedKey_Num("9");
+                    break;
+                case Key.NumPad0:
+                    PressedKey_Num("0");
+                    break;
+                case Key.Decimal:
+                    PressedKey_dot();
+                    break;
+
+                case Key.Back:
+                    PressedKey_back();
+                    break;
+                case Key.X:
+                    PressedKey_Clear();
+                    break;
+                case Key.Add:
+                    PressedKey_Oper("+");
+                    break;
+                case Key.Subtract:
+                    PressedKey_Oper("-");
+                    break;
+                case Key.Multiply:
+                    PressedKey_Oper("*");
+                    break;
+                case Key.Divide:
+                    PressedKey_Oper("+");
+                    break;
+
+            }
+        }
+        private void PressedKey_Num(string x)
+        {
+            if (boxResult.Text.Length == 1 && boxResult.Text.IndexOf("0") == 0)
+            {
+                boxResult.Text = x;
+            }
+            else
+            {
+                boxResult.Text += x;
+            }
+        }
+        private void PressedKey_back()
+        {
+            if (boxResult.Text.Length > 1)
+            {
+                boxResult.Text = boxResult.Text.Substring(0, boxResult.Text.Length - 1);
+            }
+            else
+            {
+                boxResult.Text = "0";
+            }
+        }
+        private void PressedKey_Clear()
+        {
+            numOp = 0;
+            TheResult = 0;
+            boxMain.Text = "";
+            boxResult.Text = "0";
+            operStore.Clear();
+            InitializeComponent();
+        }
+        private void PressedKey_dot()
+        {
+            if (!boxResult.Text.Contains("."))
+            {
+                boxResult.Text += ".";
+            }
+        }
+        private void PressedKey_Oper(string x)
+        {
+            operStore.Add(x);
+            OperAtEnd(x);
+
+            if (numOp == 0)
+            {
+                TheResult = float.Parse(boxResult.Text);
+            }
+
+            if (numOp >= 1)
+            {
+                float num1 = float.Parse(boxResult.Text);
+                TheResult = Cal(TheResult, operStore[numOp - 1], num1);
+                boxResult.Text = $"{TheResult}";
+            }
+            numOp += 1;
+        }
     }
 }
