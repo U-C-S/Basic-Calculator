@@ -20,13 +20,14 @@ namespace Basic_Calculator
     /// </summary>
     public partial class MainWindow : Window
     {
+        private int numOp = 0;
+        private float TheResult = 0;
+        private List<string> operStore = new List<string>();
+
         public MainWindow()
         {
             InitializeComponent();
         }
-        public bool operAtTheEnd = false;
-        private float num1 = 0, num2 = 0, result;
-        private int numOp = 0;
 
         private void Draggable(object sender, RoutedEventArgs e) => this.DragMove();
         private void Close(object sender, RoutedEventArgs e) => this.Close();
@@ -56,83 +57,82 @@ namespace Basic_Calculator
         private void Operator(object sender, RoutedEventArgs e)
         {
             Button oper = (Button)sender;
-            string opera;
+            string operClick = oper.Content.ToString();
+            operStore.Add(operClick);
+            OperAtEnd(operClick);
 
-            if (numOp == 0)
+            if(numOp == 0)
             {
-                opera = oper.Content.ToString();
-                num1 = float.Parse(boxResult.Text);
-                OperAtEnd(opera);
-            }
-            else
-            {
-                num2 = float.Parse(boxResult.Text);
-                num1 = Cal(num1, opera, num2);
-                boxResult.Text = $"{num1}";
+                TheResult = float.Parse(boxResult.Text);
             }
 
+            if (numOp >= 1)
+            {
+                float num1 = float.Parse(boxResult.Text);
+                TheResult = Cal(TheResult, operStore[numOp - 1], num1);
+                boxResult.Text = $"{TheResult}";
+            }
             numOp += 1;
         }
-
         private float Cal(float x, string a, float y)
         {
+            float resu = 0;
             switch (a)
             {
                 case "+":
-                    result = x + y;
+                    resu = x + y;
                     break;
                 case "-":
-                    result = x - y;
+                    resu = x - y;
                     break;
                 case "x":
-                    result = x * y;
+                    resu = x * y;
                     break;
                 case "/":
-                    result = x / y;
+                    resu = x / y;
                     break;
                 default:
                     boxResult.Text = "Error";
                     break;
             }
-            return result;
+            return resu;
         }
-
         private void OperAtEnd(string x)
         {
-            if(boxMain.Text == "" && boxResult.Text == "0")
+            if (boxMain.Text == "" && boxResult.Text == "0")
             {
 
             }
             else if ((boxMain.Text.EndsWith("+") || boxMain.Text.EndsWith("-") || boxMain.Text.EndsWith("x") || boxMain.Text.EndsWith("/")) && boxResult.Text == "0")
             {
                 boxMain.Text = boxMain.Text.Substring(0, boxMain.Text.Length - 1) + x;
+
             }
             else if (boxMain.Text.EndsWith(" "))
             {
-                boxMain.Text = $"{num1} {x}";
+                boxMain.Text = $"{TheResult} {x}";
             }
             else
             {
                 boxMain.Text += $" {boxResult.Text} {x}";
-               // boxResult.Text = "0";
             }
         }
 
-
         private void Btn_equal(object sender, RoutedEventArgs e)
         {
-            boxMain.Text += $" {boxResult.Text}";
-            
+            float num1 = float.Parse(boxResult.Text);
+            boxMain.Text += $" {boxResult.Text} ";
+            TheResult = Cal(TheResult, operStore[numOp - 1], num1);
+            boxResult.Text = $"{TheResult}";
         }
 
         private void Clear(object sender, RoutedEventArgs e)
         {
-            num1 = 0;
             numOp = 0;
-            num2 = 0;
-            result = 0;
+            TheResult = 0;
             boxMain.Text = "";
             boxResult.Text = "0";
+            operStore.Clear();
             InitializeComponent();
         }
 
