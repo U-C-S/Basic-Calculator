@@ -24,6 +24,7 @@ namespace Basic_Calculator
         private int numOp = 0;
         private float TheResult = 0;
         private List<string> operStore = new List<string>();
+        bool resultShowing = false;
 
         public MainWindow()
         {
@@ -39,6 +40,11 @@ namespace Basic_Calculator
             if (boxResult.Text.Length == 1 && boxResult.Text.IndexOf("0") == 0)
             {
                 boxResult.Text = btn.Content.ToString();
+            }
+            else if (resultShowing)
+            {
+                boxResult.Text = btn.Content.ToString();
+                resultShowing = false;
             }
             else
             {
@@ -59,21 +65,48 @@ namespace Basic_Calculator
         {
             Button oper = (Button)sender;
             string operClick = oper.Content.ToString();
-            operStore.Add(operClick);
             OperAtEnd(operClick);
 
-            if(numOp == 0)
+            if (numOp == 1 && boxMain.Text == "")
             {
                 TheResult = float.Parse(boxResult.Text);
             }
+            else if(numOp == 1)
+            {
+                TheResult = float.Parse(boxMain.Text.Substring(0, boxMain.Text.Length - 2));
+            }
 
-            if (numOp >= 1)
+            if (numOp >= 2)
             {
                 float num1 = float.Parse(boxResult.Text);
-                TheResult = Cal(TheResult, operStore[numOp - 1], num1);
+                TheResult = Cal(TheResult, operStore[numOp - 2], num1);
                 boxResult.Text = $"{TheResult}";
+                resultShowing = true;
             }
-            numOp += 1;
+        }
+        private void OperAtEnd(string x)
+        {
+            if (boxMain.Text == "" && boxResult.Text == "0")
+            {
+                if(x == "-")
+                {
+                    operStore.Add("-");
+                    numOp += 1;
+                    boxMain.Text = " 0 -";
+                }
+            }
+            else if ((boxMain.Text.EndsWith("+") || boxMain.Text.EndsWith("-") || boxMain.Text.EndsWith("x") || boxMain.Text.EndsWith("/")) && boxResult.Text == "0")
+            {
+                boxMain.Text = boxMain.Text.Substring(0, boxMain.Text.Length - 1) + x;
+                operStore[numOp - 1] = x;
+            }
+            else
+            {
+                boxMain.Text += $" {boxResult.Text} {x}";
+                operStore.Add(x);
+                numOp += 1;
+                resultShowing = true;
+            }
         }
         private float Cal(float x, string a, float y)
         {
@@ -98,36 +131,16 @@ namespace Basic_Calculator
             }
             return resu;
         }
-        private void OperAtEnd(string x)
-        {
-            if (boxMain.Text == "" && boxResult.Text == "0")
-            {
 
-            }
-            else if ((boxMain.Text.EndsWith("+") || boxMain.Text.EndsWith("-") || boxMain.Text.EndsWith("x") || boxMain.Text.EndsWith("/")) && boxResult.Text == "0")
-            {
-                boxMain.Text = boxMain.Text.Substring(0, boxMain.Text.Length - 1) + x;
-                numOp -= 1;
-                operStore[numOp] = x;
-            }
-            else if (boxMain.Text.EndsWith(" "))
-            {
-                boxMain.Text = $"{TheResult} {x}";
-            }
-            else
-            {
-                boxMain.Text += $" {boxResult.Text} {x}";
-            }
-        }
 
         private void Btn_equal(object sender, RoutedEventArgs e)
         {
             if(numOp > 0)
             {
                 float num1 = float.Parse(boxResult.Text);
-                boxMain.Text += $" {boxResult.Text} ";
                 TheResult = Cal(TheResult, operStore[numOp - 1], num1);
                 boxResult.Text = $"{TheResult}";
+                resultShowing = true;
             }
             else
             {
@@ -152,7 +165,11 @@ namespace Basic_Calculator
 
         private void Back(object sender, RoutedEventArgs e)
         {
-            if (boxResult.Text.Length > 1)
+            if (resultShowing)
+            {
+                boxResult.Text = "0";
+            }
+            else if (boxResult.Text.Length > 1)
             {
                 boxResult.Text = boxResult.Text.Substring(0, boxResult.Text.Length - 1);
             }
@@ -164,38 +181,48 @@ namespace Basic_Calculator
 
 
         //For Keyboard Functionality
-        private void Num1(object sender, KeyEventArgs e)
+        private void Keyboard_press(object sender, KeyEventArgs e)
         {
             switch(e.Key)
             {
                 case Key.NumPad1:
+                case Key.D1:
                     PressedKey_Num("1");
                     break;
                 case Key.NumPad2:
+                case Key.D2:
                     PressedKey_Num("2");
                     break;
                 case Key.NumPad3:
+                case Key.D3:
                     PressedKey_Num("3");
                     break;
                 case Key.NumPad4:
+                case Key.D4:
                     PressedKey_Num("4");
                     break;
                 case Key.NumPad5:
+                case Key.D5:
                     PressedKey_Num("5");
                     break;
                 case Key.NumPad6:
+                case Key.D6:
                     PressedKey_Num("6");
                     break;
                 case Key.NumPad7:
+                case Key.D7:
                     PressedKey_Num("7");
                     break;
                 case Key.NumPad8:
+                case Key.D8:
                     PressedKey_Num("8");
                     break;
                 case Key.NumPad9:
+                case Key.D9:
                     PressedKey_Num("9");
                     break;
                 case Key.NumPad0:
+                case Key.D0:
                     PressedKey_Num("0");
                     break;
                 case Key.Decimal:
@@ -218,7 +245,7 @@ namespace Basic_Calculator
                     PressedKey_Oper("*");
                     break;
                 case Key.Divide:
-                    PressedKey_Oper("+");
+                    PressedKey_Oper("/");
                     break;
 
             }
@@ -229,6 +256,11 @@ namespace Basic_Calculator
             {
                 boxResult.Text = x;
             }
+            else if (resultShowing)
+            {
+                boxResult.Text = x;
+                resultShowing = false;
+            }
             else
             {
                 boxResult.Text += x;
@@ -236,7 +268,11 @@ namespace Basic_Calculator
         }
         private void PressedKey_back()
         {
-            if (boxResult.Text.Length > 1)
+            if (resultShowing)
+            {
+                boxResult.Text = "0";
+            }
+            else if (boxResult.Text.Length > 1)
             {
                 boxResult.Text = boxResult.Text.Substring(0, boxResult.Text.Length - 1);
             }
@@ -263,21 +299,29 @@ namespace Basic_Calculator
         }
         private void PressedKey_Oper(string x)
         {
-            operStore.Add(x);
             OperAtEnd(x);
 
-            if (numOp == 0)
+            if (numOp == 1 && boxMain.Text == "")
             {
                 TheResult = float.Parse(boxResult.Text);
             }
+            else if (numOp == 1)
+            {
+                TheResult = float.Parse(boxMain.Text.Substring(0, boxMain.Text.Length - 2));
+            }
 
-            if (numOp >= 1)
+            if (numOp >= 2)
             {
                 float num1 = float.Parse(boxResult.Text);
-                TheResult = Cal(TheResult, operStore[numOp - 1], num1);
+                TheResult = Cal(TheResult, operStore[numOp - 2], num1);
                 boxResult.Text = $"{TheResult}";
+                resultShowing = true;
             }
-            numOp += 1;
+        }
+
+        private void Button_AccessKeyPressed(object sender, AccessKeyPressedEventArgs e)
+        {
+
         }
     }
 }
