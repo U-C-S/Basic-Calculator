@@ -6,12 +6,13 @@
         mc:Ignorable="d"
         Title="Simple-Calculator" Height="340" Width="300" 
         ResizeMode="NoResize" WindowStyle="None" Background="#BF000000" AllowsTransparency="True"
-        BorderThickness="2,2,2,2" UseLayoutRounding="True" Foreground="{x:Null}" BorderBrush="White" KeyDown="Keyboard_press">
+        BorderThickness="4,2,4,2" Foreground="{x:Null}" BorderBrush="#E5FFFFFF" KeyDown="Keyboard_press">
+    
     <Window.Resources>
         <Style x:Key = "btn" TargetType = "Button">
-            <Setter Property = "Height" Value = "35"/>
-            <Setter Property = "Width" Value = "65"/>
-            <Setter Property = "FontSize" Value = "12"/>
+            <Setter Property="Height" Value = "35"/>
+            <Setter Property="Width" Value = "65"/>
+            <Setter Property="FontSize" Value = "12"/>
             <Setter Property="HorizontalAlignment" Value ="Left"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
             <Setter Property="BorderBrush" Value="{x:Null}"/>
@@ -19,13 +20,12 @@
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Focusable" Value="False"/>
         </Style>
-
     </Window.Resources>
 
     <Grid>
         <Label Content="Simple - Calculator" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" FontSize="16" FontStyle="Normal" FontWeight="Normal" Height="35" FontFamily="Ink Free" Background="{x:Null}" Foreground="#FF00FFBA"/>
-        <TextBox x:Name="boxMain" HorizontalAlignment="Center" Margin="0,50,0,0" TextWrapping="Wrap" HorizontalScrollBarVisibility="Visible" VerticalAlignment="Top" Width="270" Height="18" IsReadOnly="True" FontSize="12" Background="#33000000" Foreground="White" BorderBrush="{x:Null}" Cursor="Arrow"/>
-        <TextBox x:Name="boxResult" Text="0" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,68,0,0" Width="270" Height="34" FontSize="18" Background="#33000000" Foreground="White" BorderBrush="{x:Null}" MaxLines="1" IsReadOnly="True" Cursor="Arrow"/>
+        <TextBox x:Name="boxMain" Margin="0,50,0,0" Width="270" Height="18" TextWrapping="Wrap" HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Top" IsReadOnly="True" FontSize="12" Background="#33000000" Foreground="White" BorderBrush="{x:Null}" Cursor="Arrow"/>
+        <TextBox x:Name="boxResult" Margin="0,68,0,0" Width="270" Height="34" Text="0" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" Background="#33000000" Foreground="White" BorderBrush="{x:Null}" MaxLines="1" IsReadOnly="True" Cursor="Arrow"/>
 
         <Button Content="1" Click="Btn_num" Style="{StaticResource btn}" Margin="10,172,0,0" Background="#CC73D99D" Foreground="White"/>
         <Button Content="2" Click="Btn_num" Style="{StaticResource btn}" Margin="80,172,0,0" Background="#CC73D99D" Foreground="White"/>
@@ -46,8 +46,6 @@
         <Button Content="x" Click="Operator" Style="{StaticResource btn}" Margin="220,252,0,0"  Background="#CCDDEA77"/>
         <Button Content="/" Click="Operator" Style="{StaticResource btn}" Margin="220,292,0,0"  Background="#CCDDEA77"/>
 
-
-
         <Rectangle Height="35" VerticalAlignment="Top" MouseLeftButtonDown="Draggable">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
@@ -56,7 +54,6 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-
 
         <Button Content="" Height="22" Margin="267,6,9.8,310.8" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Close" IsCancel="True" Panel.ZIndex="5" Cursor="Hand" Width="22">
             <Button.Background>
@@ -87,7 +84,6 @@
             </Button.Style>
         </Button>
 
-
         <Rectangle HorizontalAlignment="Left" Height="30" Margin="262,2,0,0" VerticalAlignment="Top" Width="30" Panel.ZIndex="2">
             <Rectangle.Fill>
                 <RadialGradientBrush>
@@ -96,8 +92,6 @@
                 </RadialGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-
-
 
     </Grid>
 </Window>

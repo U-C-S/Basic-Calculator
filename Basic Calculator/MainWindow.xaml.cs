@@ -37,54 +37,43 @@ namespace Basic_Calculator
         private void Btn_num(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
+            string btnVal = btn.Content.ToString();
+            NumberFunc(btnVal);
+        }
+        private void Btn_dot(object sender, RoutedEventArgs e) => DotCheck();
+
+        private void NumberFunc (string i)
+        {
             if (boxResult.Text.Length == 1 && boxResult.Text.IndexOf("0") == 0)
             {
-                boxResult.Text = btn.Content.ToString();
+                boxResult.Text = i;
             }
             else if (resultShowing)
             {
-                boxResult.Text = btn.Content.ToString();
+                boxResult.Text = i;
                 resultShowing = false;
             }
             else
             {
-                boxResult.Text += btn.Content.ToString();
+                boxResult.Text += i;
             }
         }
-        private void Btn_dot(object sender, RoutedEventArgs e)
+
+        private void DotCheck()
         {
             if (!boxResult.Text.Contains("."))
             {
                 boxResult.Text += ".";
             }
-            
         }
 
         //Calculation logic
         private void Operator(object sender, RoutedEventArgs e)
         {
             Button oper = (Button)sender;
-            string operClick = oper.Content.ToString();
-            OperAtEnd(operClick);
-
-            if (numOp == 1 && boxMain.Text == "")
-            {
-                TheResult = float.Parse(boxResult.Text);
-            }
-            else if(numOp == 1)
-            {
-                TheResult = float.Parse(boxMain.Text.Substring(0, boxMain.Text.Length - 2));
-            }
-
-            if (numOp >= 2)
-            {
-                float num1 = float.Parse(boxResult.Text);
-                TheResult = Cal(TheResult, operStore[numOp - 2], num1);
-                boxResult.Text = $"{TheResult}";
-                resultShowing = true;
-            }
+            CheckandCal(oper.Content.ToString());
         }
-        private void OperAtEnd(string x)
+        private void CheckandCal(string x)
         {
             if (boxMain.Text == "" && boxResult.Text == "0")
             {
@@ -107,8 +96,26 @@ namespace Basic_Calculator
                 numOp += 1;
                 resultShowing = true;
             }
+
+
+            if (numOp == 1 && boxMain.Text == "")
+            {
+                TheResult = float.Parse(boxResult.Text);
+            }
+            else if (numOp == 1)
+            {
+                TheResult = float.Parse(boxMain.Text.Substring(0, boxMain.Text.Length - 2));
+            }
+
+            if (numOp >= 2)
+            {
+                float num1 = float.Parse(boxResult.Text);
+                TheResult = Calu(TheResult, operStore[numOp - 2], num1);
+                boxResult.Text = $"{TheResult}";
+                resultShowing = true;
+            }
         }
-        private float Cal(float x, string a, float y)
+        private float Calu(float x, string a, float y)
         {
             float resu = 0;
             switch (a)
@@ -132,13 +139,12 @@ namespace Basic_Calculator
             return resu;
         }
 
-
         private void Btn_equal(object sender, RoutedEventArgs e)
         {
             if(numOp > 0)
             {
                 float num1 = float.Parse(boxResult.Text);
-                TheResult = Cal(TheResult, operStore[numOp - 1], num1);
+                TheResult = Calu(TheResult, operStore[numOp - 1], num1);
                 boxResult.Text = $"{TheResult}";
                 resultShowing = true;
             }
@@ -153,17 +159,11 @@ namespace Basic_Calculator
             operStore.Clear();
         }
 
-        private void Clear(object sender, RoutedEventArgs e)
-        {
-            numOp = 0;
-            TheResult = 0;
-            boxMain.Text = "";
-            boxResult.Text = "0";
-            operStore.Clear();
-            InitializeComponent();
-        }
+        private void Clear(object sender, RoutedEventArgs e) => ClearEverything();
+        private void Back(object sender, RoutedEventArgs e) => BackSpace();
 
-        private void Back(object sender, RoutedEventArgs e)
+
+        private void BackSpace()
         {
             if (resultShowing)
             {
@@ -177,6 +177,16 @@ namespace Basic_Calculator
             {
                 boxResult.Text = "0";
             }
+        }
+
+        private void ClearEverything()
+        {
+            numOp = 0;
+            TheResult = 0;
+            boxMain.Text = "";
+            boxResult.Text = "0";
+            operStore.Clear();
+            InitializeComponent();
         }
 
 
@@ -187,141 +197,77 @@ namespace Basic_Calculator
             {
                 case Key.NumPad1:
                 case Key.D1:
-                    PressedKey_Num("1");
+                    NumberFunc("1");
                     break;
                 case Key.NumPad2:
                 case Key.D2:
-                    PressedKey_Num("2");
+                    NumberFunc("2");
                     break;
                 case Key.NumPad3:
                 case Key.D3:
-                    PressedKey_Num("3");
+                    NumberFunc("3");
                     break;
                 case Key.NumPad4:
                 case Key.D4:
-                    PressedKey_Num("4");
+                    NumberFunc("4");
                     break;
                 case Key.NumPad5:
                 case Key.D5:
-                    PressedKey_Num("5");
+                    NumberFunc("5");
                     break;
                 case Key.NumPad6:
                 case Key.D6:
-                    PressedKey_Num("6");
+                    NumberFunc("6");
                     break;
                 case Key.NumPad7:
                 case Key.D7:
-                    PressedKey_Num("7");
+                    NumberFunc("7");
                     break;
                 case Key.NumPad8:
                 case Key.D8:
-                    PressedKey_Num("8");
+                    NumberFunc("8");
                     break;
                 case Key.NumPad9:
                 case Key.D9:
-                    PressedKey_Num("9");
+                    NumberFunc("9");
                     break;
                 case Key.NumPad0:
                 case Key.D0:
-                    PressedKey_Num("0");
+                    NumberFunc("0");
                     break;
                 case Key.Decimal:
-                    PressedKey_dot();
+                    DotCheck();
                     break;
 
                 case Key.Back:
-                    PressedKey_back();
+                    BackSpace();
                     break;
                 case Key.X:
-                    PressedKey_Clear();
+                    ClearEverything();
                     break;
                 case Key.Add:
-                    PressedKey_Oper("+");
+                    CheckandCal("+");
                     break;
                 case Key.Subtract:
-                    PressedKey_Oper("-");
+                    CheckandCal("-");
                     break;
                 case Key.Multiply:
-                    PressedKey_Oper("*");
+                    CheckandCal("x");
                     break;
                 case Key.Divide:
-                    PressedKey_Oper("/");
+                    CheckandCal("/");
                     break;
 
             }
         }
-        private void PressedKey_Num(string x)
-        {
-            if (boxResult.Text.Length == 1 && boxResult.Text.IndexOf("0") == 0)
-            {
-                boxResult.Text = x;
-            }
-            else if (resultShowing)
-            {
-                boxResult.Text = x;
-                resultShowing = false;
-            }
-            else
-            {
-                boxResult.Text += x;
-            }
-        }
-        private void PressedKey_back()
-        {
-            if (resultShowing)
-            {
-                boxResult.Text = "0";
-            }
-            else if (boxResult.Text.Length > 1)
-            {
-                boxResult.Text = boxResult.Text.Substring(0, boxResult.Text.Length - 1);
-            }
-            else
-            {
-                boxResult.Text = "0";
-            }
-        }
-        private void PressedKey_Clear()
-        {
-            numOp = 0;
-            TheResult = 0;
-            boxMain.Text = "";
-            boxResult.Text = "0";
-            operStore.Clear();
-            InitializeComponent();
-        }
-        private void PressedKey_dot()
-        {
-            if (!boxResult.Text.Contains("."))
-            {
-                boxResult.Text += ".";
-            }
-        }
-        private void PressedKey_Oper(string x)
-        {
-            OperAtEnd(x);
 
-            if (numOp == 1 && boxMain.Text == "")
-            {
-                TheResult = float.Parse(boxResult.Text);
-            }
-            else if (numOp == 1)
-            {
-                TheResult = float.Parse(boxMain.Text.Substring(0, boxMain.Text.Length - 2));
-            }
-
-            if (numOp >= 2)
-            {
-                float num1 = float.Parse(boxResult.Text);
-                TheResult = Cal(TheResult, operStore[numOp - 2], num1);
-                boxResult.Text = $"{TheResult}";
-                resultShowing = true;
-            }
-        }
-
-        private void Button_AccessKeyPressed(object sender, AccessKeyPressedEventArgs e)
-        {
-
-        }
     }
 }
+
+/*
+else if (resultShowing)
+            {
+                boxMain.Text = boxMain.Text.Substring(0, boxMain.Text.Length - 1) + x;
+                operStore[numOp - 1] = x;
+            }
+*/
