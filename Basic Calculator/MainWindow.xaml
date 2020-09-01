@@ -7,7 +7,7 @@
         Title="Simple-Calculator" Height="340" Width="300" 
         ResizeMode="NoResize" WindowStyle="None" Background="#BF000000" AllowsTransparency="True"
         BorderThickness="4,2,4,2" Foreground="{x:Null}" BorderBrush="#E5FFFFFF" KeyDown="Keyboard_press">
-    
+
     <Window.Resources>
         <Style x:Key = "btn" TargetType = "Button">
             <Setter Property="Height" Value = "35"/>
@@ -55,7 +55,7 @@
             </Rectangle.Fill>
         </Rectangle>
 
-        <Button Content="" Height="22" Margin="267,6,9.8,310.8" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Close" IsCancel="True" Panel.ZIndex="5" Cursor="Hand" Width="22">
+        <Button Content="" Height="22" Margin="265,5,5,309.8" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Close" IsCancel="True" Panel.ZIndex="5" Cursor="Hand">
             <Button.Background>
                 <ImageBrush ImageSource="close-window-24.png"/>
             </Button.Background>
@@ -84,7 +84,7 @@
             </Button.Style>
         </Button>
 
-        <Rectangle HorizontalAlignment="Left" Height="30" Margin="262,2,0,0" VerticalAlignment="Top" Width="30" Panel.ZIndex="2">
+        <Rectangle HorizontalAlignment="Left" Height="26" Margin="262,3,0,0" VerticalAlignment="Top" Width="26" Panel.ZIndex="2">
             <Rectangle.Fill>
                 <RadialGradientBrush>
                     <GradientStop Color="#B200FFA8"/>

@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace Basic_Calculator
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private int numOp = 0;
@@ -26,11 +23,9 @@ namespace Basic_Calculator
         private List<string> operStore = new List<string>();
         bool resultShowing = false;
 
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        public MainWindow() => InitializeComponent();
 
+        //UI Events
         private void Draggable(object sender, RoutedEventArgs e) => this.DragMove();
         private void Close(object sender, RoutedEventArgs e) => this.Close();
 
@@ -41,107 +36,18 @@ namespace Basic_Calculator
             NumberFunc(btnVal);
         }
         private void Btn_dot(object sender, RoutedEventArgs e) => DotCheck();
-
-        private void NumberFunc (string i)
-        {
-            if (boxResult.Text.Length == 1 && boxResult.Text.IndexOf("0") == 0)
-            {
-                boxResult.Text = i;
-            }
-            else if (resultShowing)
-            {
-                boxResult.Text = i;
-                resultShowing = false;
-            }
-            else
-            {
-                boxResult.Text += i;
-            }
-        }
-
-        private void DotCheck()
-        {
-            if (!boxResult.Text.Contains("."))
-            {
-                boxResult.Text += ".";
-            }
-        }
-
-        //Calculation logic
         private void Operator(object sender, RoutedEventArgs e)
         {
             Button oper = (Button)sender;
             CheckandCal(oper.Content.ToString());
         }
-        private void CheckandCal(string x)
-        {
-            if (boxMain.Text == "" && boxResult.Text == "0")
-            {
-                if(x == "-")
-                {
-                    operStore.Add("-");
-                    numOp += 1;
-                    boxMain.Text = " 0 -";
-                }
-            }
-            else if ((boxMain.Text.EndsWith("+") || boxMain.Text.EndsWith("-") || boxMain.Text.EndsWith("x") || boxMain.Text.EndsWith("/")) && boxResult.Text == "0")
-            {
-                boxMain.Text = boxMain.Text.Substring(0, boxMain.Text.Length - 1) + x;
-                operStore[numOp - 1] = x;
-            }
-            else
-            {
-                boxMain.Text += $" {boxResult.Text} {x}";
-                operStore.Add(x);
-                numOp += 1;
-                resultShowing = true;
-            }
-
-
-            if (numOp == 1 && boxMain.Text == "")
-            {
-                TheResult = float.Parse(boxResult.Text);
-            }
-            else if (numOp == 1)
-            {
-                TheResult = float.Parse(boxMain.Text.Substring(0, boxMain.Text.Length - 2));
-            }
-
-            if (numOp >= 2)
-            {
-                float num1 = float.Parse(boxResult.Text);
-                TheResult = Calu(TheResult, operStore[numOp - 2], num1);
-                boxResult.Text = $"{TheResult}";
-                resultShowing = true;
-            }
-        }
-        private float Calu(float x, string a, float y)
-        {
-            float resu = 0;
-            switch (a)
-            {
-                case "+":
-                    resu = x + y;
-                    break;
-                case "-":
-                    resu = x - y;
-                    break;
-                case "x":
-                    resu = x * y;
-                    break;
-                case "/":
-                    resu = x / y;
-                    break;
-                default:
-                    boxResult.Text = "Error";
-                    break;
-            }
-            return resu;
-        }
-
         private void Btn_equal(object sender, RoutedEventArgs e)
         {
-            if(numOp > 0)
+            if (resultShowing)
+            {
+                boxResult.Text = $"{TheResult}";
+            }
+            else if (numOp > 0)
             {
                 float num1 = float.Parse(boxResult.Text);
                 TheResult = Calu(TheResult, operStore[numOp - 1], num1);
@@ -158,10 +64,100 @@ namespace Basic_Calculator
             boxMain.Text = "";
             operStore.Clear();
         }
-
         private void Clear(object sender, RoutedEventArgs e) => ClearEverything();
         private void Back(object sender, RoutedEventArgs e) => BackSpace();
 
+
+        //UI Event Functions--------
+        private void NumberFunc (string i)
+        {
+            if (boxResult.Text.Length == 1 && boxResult.Text.IndexOf("0") == 0)
+            {
+                boxResult.Text = i;
+            }
+            else if (resultShowing)
+            {
+                boxResult.Text = i;
+                resultShowing = false;
+            }
+            else
+            {
+                boxResult.Text += i;
+            }
+
+        }
+
+        private void DotCheck()
+        {
+            if (!boxResult.Text.Contains("."))
+            {
+                boxResult.Text += ".";
+            }
+        }
+
+        //Calculation logic--
+        private void CheckandCal(string x)
+        {
+            if (resultShowing)
+            {
+                boxMain.Text = boxMain.Text.Substring(0, boxMain.Text.Length - 1) + x;
+                operStore[numOp - 1] = x;
+            }
+            else if ((boxMain.Text.EndsWith("+") || boxMain.Text.EndsWith("-") || boxMain.Text.EndsWith("x") || boxMain.Text.EndsWith("/")) && boxResult.Text == "0")
+            {
+                boxMain.Text = boxMain.Text.Substring(0, boxMain.Text.Length - 1) + x;
+                operStore[numOp - 1] = x;
+            }
+            else
+            {
+                boxMain.Text += $" {boxResult.Text} {x}";
+                operStore.Add(x);
+                numOp += 1;
+            }
+
+
+            if (numOp == 1 && boxMain.Text == "")
+            {
+                TheResult = float.Parse(boxResult.Text);
+            }
+            else if (numOp == 1)
+            {
+                TheResult = float.Parse(boxMain.Text.Substring(0, boxMain.Text.Length - 2));
+                resultShowing = true;
+            }
+
+
+            if (numOp >= 2 && !resultShowing)
+            {
+                float num1 = float.Parse(boxResult.Text);
+                TheResult = Calu(TheResult, operStore[numOp - 2], num1);
+                boxResult.Text = $"{TheResult}";
+                resultShowing = true;
+            }
+        }
+
+        private float Calu(float x, string a, float y)
+        {
+            float resu;
+            switch (a)
+            {
+                case "+":
+                    resu = x + y;
+                    break;
+                case "-":
+                    resu = x - y;
+                    break;
+                case "x":
+                    resu = x * y;
+                    break;
+                case "/":
+                    resu = x / y;
+                    break;
+                default:
+                    throw new Exception("Operator Error");
+            }
+            return resu;
+        }
 
         private void BackSpace()
         {
@@ -186,11 +182,11 @@ namespace Basic_Calculator
             boxMain.Text = "";
             boxResult.Text = "0";
             operStore.Clear();
+            resultShowing = false;
             InitializeComponent();
         }
 
-
-        //For Keyboard Functionality
+        //For Keyboard Functionality-----
         private void Keyboard_press(object sender, KeyEventArgs e)
         {
             switch(e.Key)
@@ -263,11 +259,3 @@ namespace Basic_Calculator
 
     }
 }
-
-/*
-else if (resultShowing)
-            {
-                boxMain.Text = boxMain.Text.Substring(0, boxMain.Text.Length - 1) + x;
-                operStore[numOp - 1] = x;
-            }
-*/
