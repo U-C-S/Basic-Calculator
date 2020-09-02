@@ -18,16 +18,17 @@ namespace Basic_Calculator
 {
     public partial class MainWindow : Window
     {
+        public MainWindow() => InitializeComponent();
+
         private int numOp = 0;
         private float TheResult = 0;
         private List<string> operStore = new List<string>();
         bool resultShowing = false;
 
-        public MainWindow() => InitializeComponent();
 
         //UI Events
-        private void Draggable(object sender, RoutedEventArgs e) => this.DragMove();
-        private void Close(object sender, RoutedEventArgs e) => this.Close();
+        private void Draggable(object sender, RoutedEventArgs e) => DragMove();
+        private void Close(object sender, RoutedEventArgs e) => Close();
 
         private void Btn_num(object sender, RoutedEventArgs e)
         {
@@ -84,26 +85,17 @@ namespace Basic_Calculator
             {
                 boxResult.Text += i;
             }
-
         }
 
         private void DotCheck()
         {
-            if (!boxResult.Text.Contains("."))
-            {
-                boxResult.Text += ".";
-            }
+            if (!boxResult.Text.Contains(".")) { boxResult.Text += "."; }
         }
 
         //Calculation logic--
         private void CheckandCal(string x)
         {
-            if (resultShowing)
-            {
-                boxMain.Text = boxMain.Text.Substring(0, boxMain.Text.Length - 1) + x;
-                operStore[numOp - 1] = x;
-            }
-            else if ((boxMain.Text.EndsWith("+") || boxMain.Text.EndsWith("-") || boxMain.Text.EndsWith("x") || boxMain.Text.EndsWith("/")) && boxResult.Text == "0")
+            if (((boxMain.Text.EndsWith("+") || boxMain.Text.EndsWith("-") || boxMain.Text.EndsWith("x") || boxMain.Text.EndsWith("/")) && boxResult.Text == "0") || resultShowing)
             {
                 boxMain.Text = boxMain.Text.Substring(0, boxMain.Text.Length - 1) + x;
                 operStore[numOp - 1] = x;
@@ -142,17 +134,13 @@ namespace Basic_Calculator
             switch (a)
             {
                 case "+":
-                    resu = x + y;
-                    break;
+                    resu = x + y; break;
                 case "-":
-                    resu = x - y;
-                    break;
+                    resu = x - y; break;
                 case "x":
-                    resu = x * y;
-                    break;
+                    resu = x * y; break;
                 case "/":
-                    resu = x / y;
-                    break;
+                    resu = x / y; break;
                 default:
                     throw new Exception("Operator Error");
             }
@@ -162,17 +150,11 @@ namespace Basic_Calculator
         private void BackSpace()
         {
             if (resultShowing)
-            {
                 boxResult.Text = "0";
-            }
             else if (boxResult.Text.Length > 1)
-            {
                 boxResult.Text = boxResult.Text.Substring(0, boxResult.Text.Length - 1);
-            }
             else
-            {
                 boxResult.Text = "0";
-            }
         }
 
         private void ClearEverything()
@@ -193,66 +175,44 @@ namespace Basic_Calculator
             {
                 case Key.NumPad1:
                 case Key.D1:
-                    NumberFunc("1");
-                    break;
+                    NumberFunc("1"); break;
                 case Key.NumPad2:
                 case Key.D2:
-                    NumberFunc("2");
-                    break;
+                    NumberFunc("2"); break;
                 case Key.NumPad3:
                 case Key.D3:
-                    NumberFunc("3");
-                    break;
+                    NumberFunc("3"); break;
                 case Key.NumPad4:
                 case Key.D4:
-                    NumberFunc("4");
-                    break;
+                    NumberFunc("4"); break;
                 case Key.NumPad5:
                 case Key.D5:
-                    NumberFunc("5");
-                    break;
+                    NumberFunc("5"); break;
                 case Key.NumPad6:
                 case Key.D6:
-                    NumberFunc("6");
-                    break;
+                    NumberFunc("6"); break;
                 case Key.NumPad7:
                 case Key.D7:
-                    NumberFunc("7");
-                    break;
+                    NumberFunc("7"); break;
                 case Key.NumPad8:
                 case Key.D8:
-                    NumberFunc("8");
-                    break;
+                    NumberFunc("8"); break;
                 case Key.NumPad9:
                 case Key.D9:
-                    NumberFunc("9");
-                    break;
+                    NumberFunc("9"); break;
                 case Key.NumPad0:
                 case Key.D0:
-                    NumberFunc("0");
-                    break;
+                    NumberFunc("0"); break;
                 case Key.Decimal:
-                    DotCheck();
-                    break;
+                    DotCheck(); break;
 
-                case Key.Back:
-                    BackSpace();
-                    break;
-                case Key.X:
-                    ClearEverything();
-                    break;
-                case Key.Add:
-                    CheckandCal("+");
-                    break;
-                case Key.Subtract:
-                    CheckandCal("-");
-                    break;
-                case Key.Multiply:
-                    CheckandCal("x");
-                    break;
-                case Key.Divide:
-                    CheckandCal("/");
-                    break;
+                case Key.Back: BackSpace(); break;
+                case Key.X: ClearEverything(); break;
+
+                case Key.Add: CheckandCal("+"); break;
+                case Key.Subtract: CheckandCal("-"); break;
+                case Key.Multiply: CheckandCal("x"); break;
+                case Key.Divide: CheckandCal("/"); break;
 
             }
         }
