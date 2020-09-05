@@ -79,12 +79,13 @@ namespace Basic_Calculator
             else if (resultShowing)
             {
                 boxResult.Text = i;
-                resultShowing = false;
             }
             else
             {
                 boxResult.Text += i;
             }
+            resultShowing = false;
+
         }
 
         private void DotCheck()
@@ -95,7 +96,7 @@ namespace Basic_Calculator
         //Calculation logic--
         private void CheckandCal(string x)
         {
-            if (((boxMain.Text.EndsWith("+") || boxMain.Text.EndsWith("-") || boxMain.Text.EndsWith("x") || boxMain.Text.EndsWith("/")) && boxResult.Text == "0") || resultShowing)
+            if (resultShowing && boxMain.Text != "")
             {
                 boxMain.Text = boxMain.Text.Substring(0, boxMain.Text.Length - 1) + x;
                 operStore[numOp - 1] = x;
@@ -107,12 +108,7 @@ namespace Basic_Calculator
                 numOp += 1;
             }
 
-
-            if (numOp == 1 && boxMain.Text == "")
-            {
-                TheResult = float.Parse(boxResult.Text);
-            }
-            else if (numOp == 1)
+            if (numOp == 1)
             {
                 TheResult = float.Parse(boxMain.Text.Substring(0, boxMain.Text.Length - 2));
                 resultShowing = true;
@@ -141,8 +137,7 @@ namespace Basic_Calculator
                     resu = x * y; break;
                 case "/":
                     resu = x / y; break;
-                default:
-                    throw new Exception("Operator Error");
+                default: throw new Exception("Operator Error");
             }
             return resu;
         }
@@ -165,7 +160,6 @@ namespace Basic_Calculator
             boxResult.Text = "0";
             operStore.Clear();
             resultShowing = false;
-            InitializeComponent();
         }
 
         //For Keyboard Functionality-----
@@ -216,6 +210,6 @@ namespace Basic_Calculator
 
             }
         }
-
+        
     }
 }

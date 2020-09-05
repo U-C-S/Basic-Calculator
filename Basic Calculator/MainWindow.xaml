@@ -6,7 +6,7 @@
         mc:Ignorable="d"
         Title="Simple-Calculator" Height="340" Width="300" 
         ResizeMode="NoResize" WindowStyle="None" Background="#BF000000" AllowsTransparency="True"
-        BorderThickness="4,2,4,2" Foreground="{x:Null}" BorderBrush="#E5FFFFFF" KeyDown="Keyboard_press">
+        BorderThickness="2,2,2,2" Foreground="{x:Null}" BorderBrush="#E5FFFFFF" KeyDown="Keyboard_press">
 
     <Window.Resources>
         <Style x:Key = "btn" TargetType = "Button">
@@ -55,7 +55,7 @@
             </Rectangle.Fill>
         </Rectangle>
 
-        <Button Content="" Height="22" Margin="265,5,5,309.8" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Close" IsCancel="True" Panel.ZIndex="5" Cursor="Hand">
+        <Button Content="" Height="22" Margin="0,5,5,0" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Close" IsCancel="True" Panel.ZIndex="5" Cursor="Hand" Width="22.4" HorizontalAlignment="Right" VerticalAlignment="Top">
             <Button.Background>
                 <ImageBrush ImageSource="close-window-24.png"/>
             </Button.Background>
@@ -84,11 +84,11 @@
             </Button.Style>
         </Button>
 
-        <Rectangle HorizontalAlignment="Left" Height="26" Margin="262,3,0,0" VerticalAlignment="Top" Width="26" Panel.ZIndex="2">
+        <Rectangle HorizontalAlignment="Right" Height="22" Margin="0,5,5,0" VerticalAlignment="Top" Width="22" Panel.ZIndex="2">
             <Rectangle.Fill>
                 <RadialGradientBrush>
-                    <GradientStop Color="#B200FFA8"/>
-                    <GradientStop Color="#00000000" Offset="0.7"/>
+                    <GradientStop Color="#B200FFA8" Offset="0.55"/>
+                    <GradientStop Color="#00000000" Offset="0.8"/>
                 </RadialGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
