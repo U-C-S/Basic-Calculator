@@ -1,18 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Basic_Calculator
 {
@@ -33,8 +23,7 @@ namespace Basic_Calculator
         private void Btn_num(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
-            string btnVal = btn.Content.ToString();
-            NumberFunc(btnVal);
+            NumberFunc(btn.Content.ToString());
         }
         private void Btn_dot(object sender, RoutedEventArgs e) => DotCheck();
         private void Operator(object sender, RoutedEventArgs e)
@@ -70,7 +59,7 @@ namespace Basic_Calculator
 
 
         //UI Event Functions--------
-        private void NumberFunc (string i)
+        private void NumberFunc(string i)
         {
             if (boxResult.Text.Length == 1 && boxResult.Text.IndexOf("0") == 0)
             {
@@ -165,7 +154,7 @@ namespace Basic_Calculator
         //For Keyboard Functionality-----
         private void Keyboard_press(object sender, KeyEventArgs e)
         {
-            switch(e.Key)
+            switch (e.Key)
             {
                 case Key.NumPad1:
                 case Key.D1:
@@ -210,6 +199,6 @@ namespace Basic_Calculator
 
             }
         }
-        
+
     }
 }
