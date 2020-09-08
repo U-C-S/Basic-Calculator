@@ -15,7 +15,6 @@ namespace Basic_Calculator
         private List<string> operStore = new List<string>();
         bool resultShowing = false;
 
-
         //UI Events
         private void Draggable(object sender, RoutedEventArgs e) => DragMove();
         private void Close(object sender, RoutedEventArgs e) => Close();
@@ -31,29 +30,7 @@ namespace Basic_Calculator
             Button oper = (Button)sender;
             CheckandCal(oper.Content.ToString());
         }
-        private void Btn_equal(object sender, RoutedEventArgs e)
-        {
-            if (resultShowing)
-            {
-                boxResult.Text = $"{TheResult}";
-            }
-            else if (numOp > 0)
-            {
-                float num1 = float.Parse(boxResult.Text);
-                TheResult = Calu(TheResult, operStore[numOp - 1], num1);
-                boxResult.Text = $"{TheResult}";
-                resultShowing = true;
-            }
-            else
-            {
-                boxResult.Text = boxResult.Text;
-            }
-
-            numOp = 0;
-            TheResult = 0;
-            boxMain.Text = "";
-            operStore.Clear();
-        }
+        private void Btn_equal(object sender, RoutedEventArgs e) => TheEnterKey();
         private void Clear(object sender, RoutedEventArgs e) => ClearEverything();
         private void Back(object sender, RoutedEventArgs e) => BackSpace();
 
@@ -141,6 +118,30 @@ namespace Basic_Calculator
                 boxResult.Text = "0";
         }
 
+        private void TheEnterKey()
+        {
+            if (resultShowing)
+            {
+                boxResult.Text = $"{TheResult}";
+            }
+            else if (numOp > 0)
+            {
+                float num1 = float.Parse(boxResult.Text);
+                TheResult = Calu(TheResult, operStore[numOp - 1], num1);
+                boxResult.Text = $"{TheResult}";
+                resultShowing = true;
+            }
+            else
+            {
+                boxResult.Text = boxResult.Text;
+            }
+
+            numOp = 0;
+            TheResult = 0;
+            boxMain.Text = "";
+            operStore.Clear();
+        }
+
         private void ClearEverything()
         {
             numOp = 0;
@@ -186,9 +187,9 @@ namespace Basic_Calculator
                 case Key.NumPad0:
                 case Key.D0:
                     NumberFunc("0"); break;
-                case Key.Decimal:
-                    DotCheck(); break;
 
+                case Key.Decimal: DotCheck(); break;
+                case Key.Enter: TheEnterKey(); break;
                 case Key.Back: BackSpace(); break;
                 case Key.X: ClearEverything(); break;
 

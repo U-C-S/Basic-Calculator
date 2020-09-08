@@ -52,7 +52,7 @@
         <Button Content="9" Click="Btn_num" Style="{StaticResource btn}" Margin="150,252,0,0" Background="#CC73D99D" Foreground="White"/>
         <Button Content="0" Click="Btn_num" Style="{StaticResource btn}" Margin="80,292,0,0" Background="#CC73D99D" Foreground="White"/>
         <Button Content="." Click="Btn_dot" Style="{StaticResource btn}" Margin="10,292,0,0" Background="#B2DDDDDD"/>
-        <Button Content="=" Click="Btn_equal" Style="{StaticResource btn}" Margin="150,292,0,0"  Background="#CCFF0065" Foreground="#CCFFFFFF" IsDefault="True"/>
+        <Button Content="=" Click="Btn_equal" Style="{StaticResource btn}" Margin="150,292,0,0"  Background="#CCFF0065" Foreground="#CCFFFFFF"/>
         <Button Content="Clear" Click="Clear" Style="{StaticResource btn}" Margin="10,132,0,0" Background="#B2716FCD" Foreground="#CCFFFFFF"/>
         <Button Content="+" Click="Operator" Style="{StaticResource btn}" Margin="220,172,0,0"  Background="#CCDDEA77"/>
         <Button Content="-" Click="Operator" Style="{StaticResource btn}" Margin="220,212,0,0"  Background="#CCDDEA77"/>
