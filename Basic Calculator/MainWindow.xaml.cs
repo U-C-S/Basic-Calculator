@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.IO;
 
 namespace Basic_Calculator
 {
@@ -10,9 +11,9 @@ namespace Basic_Calculator
     {
         public MainWindow() => InitializeComponent();
 
-        private int numOp = 0;
-        private float TheResult = 0;
-        private List<string> operStore = new List<string>();
+        int numOp = 0;
+        float TheResult = 0;
+        List<string> operStore = new List<string>();
         bool resultShowing = false;
 
         //UI Events
@@ -80,7 +81,6 @@ namespace Basic_Calculator
                 resultShowing = true;
             }
 
-
             if (numOp >= 2 && !resultShowing)
             {
                 float num1 = float.Parse(boxResult.Text);
@@ -135,7 +135,7 @@ namespace Basic_Calculator
             {
                 boxResult.Text = boxResult.Text;
             }
-
+            //File.WriteAllText("History.txt", $"{boxMain.Text} = {boxResult.Text}");
             numOp = 0;
             TheResult = 0;
             boxMain.Text = "";
