@@ -37,9 +37,9 @@
     </Window.Resources>
 
     <Grid>
-        <Label Content="Simple - Calculator" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" FontSize="16" FontStyle="Normal" FontWeight="Normal" Height="35" FontFamily="Ink Free" Background="{x:Null}" Foreground="#FF00FFBA"/>
-        <TextBox x:Name="boxMain" Margin="0,50,0,0" Width="270" Height="18" TextWrapping="Wrap" HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Top" IsReadOnly="True" FontSize="12" Background="#33000000" Foreground="White" BorderBrush="{x:Null}" Cursor="Arrow"/>
-        <TextBox x:Name="boxResult" Margin="0,68,0,0" Width="270" Height="34" Text="0" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" Background="#33000000" Foreground="White" BorderBrush="{x:Null}" MaxLines="1" IsReadOnly="True" Cursor="Arrow"/>
+        <Label Content="Simple - Calculator" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" FontSize="16" Height="35" FontFamily="Ink Free" Background="{x:Null}" Foreground="#FF00FFBA"/>
+        <TextBlock x:Name="boxMain" Margin="0,50,0,0" Width="270" Height="18" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" Background="#33000000" Foreground="White" Cursor="Arrow"/>
+        <TextBlock x:Name="boxResult" Margin="0,68,0,0" Width="270" Height="34" Text="0" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" Background="#33000000" Foreground="White" Cursor="Arrow"/>
 
         <Button Content="1" Click="Btn_num" Style="{StaticResource btn}" Margin="10,172,0,0" Background="#CC73D99D" Foreground="White"/>
         <Button Content="2" Click="Btn_num" Style="{StaticResource btn}" Margin="80,172,0,0" Background="#CC73D99D" Foreground="White"/>
