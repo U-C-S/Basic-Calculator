@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.IO;
 
 namespace Basic_Calculator
 {
@@ -19,7 +18,6 @@ namespace Basic_Calculator
         //UI Events
         private void Draggable(object sender, RoutedEventArgs e) => DragMove();
         private void Close(object sender, RoutedEventArgs e) => Close();
-
         private void Btn_num(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
@@ -52,7 +50,6 @@ namespace Basic_Calculator
                 boxResult.Text += i;
             }
             resultShowing = false;
-
         }
 
         private void DotCheck()
@@ -135,7 +132,6 @@ namespace Basic_Calculator
             {
                 boxResult.Text = boxResult.Text;
             }
-            //File.WriteAllText("History.txt", $"{boxMain.Text} = {boxResult.Text}");
             numOp = 0;
             TheResult = 0;
             boxMain.Text = "";
@@ -197,9 +193,7 @@ namespace Basic_Calculator
                 case Key.Subtract: CheckandCal("-"); break;
                 case Key.Multiply: CheckandCal("x"); break;
                 case Key.Divide: CheckandCal("/"); break;
-
             }
         }
-
     }
 }
