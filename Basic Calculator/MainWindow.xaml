@@ -37,7 +37,7 @@
     </Window.Resources>
 
     <Grid>
-        <Label Content="Simple - Calculator" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" FontSize="16" Height="35" FontFamily="Ink Free" Background="{x:Null}" Foreground="#FF00FFBA"/>
+        <Label Content="Calculator" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" FontSize="16" Height="35" FontFamily="Ink Free" Background="{x:Null}" Foreground="#FF00FFBA"/>
         <TextBlock x:Name="boxMain" Margin="0,50,0,0" Width="270" Height="18" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" Background="#33000000" Foreground="White" Cursor="Arrow"/>
         <TextBlock x:Name="boxResult" Margin="0,68,0,0" Width="270" Height="34" Text="0" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" Background="#33000000" Foreground="White" Cursor="Arrow"/>
 
@@ -51,7 +51,7 @@
         <Button Content="8" Click="Btn_num" Style="{StaticResource btn}" Margin="80,252,0,0" Background="#CC73D99D" Foreground="White"/>
         <Button Content="9" Click="Btn_num" Style="{StaticResource btn}" Margin="150,252,0,0" Background="#CC73D99D" Foreground="White"/>
         <Button Content="0" Click="Btn_num" Style="{StaticResource btn}" Margin="80,292,0,0" Background="#CC73D99D" Foreground="White"/>
-        <Button Content="." Click="Btn_dot" Style="{StaticResource btn}" Margin="10,292,0,0" Background="#B2DDDDDD"/>
+        <Button Content="." Click="Btn_dot" Style="{StaticResource btn}" Margin="10,292,0,0" Background="#B2FFFFFF"/>
         <Button Content="=" Click="Btn_equal" Style="{StaticResource btn}" Margin="150,292,0,0"  Background="#CCFF0065" Foreground="#CCFFFFFF"/>
         <Button Content="Clear" Click="Clear" Style="{StaticResource btn}" Margin="10,132,0,0" Background="#B2716FCD" Foreground="#CCFFFFFF"/>
         <Button Content="+" Click="Operator" Style="{StaticResource btn}" Margin="220,172,0,0"  Background="#CCDDEA77"/>
