@@ -3,7 +3,6 @@
 
 [Download](https://github.com/U-C-S/Basic-Calculator/raw/master/Build/Basic%20Calculator.exe) the Latest Version....
 
-My first learning project using C# and took me a week to finish off because I want to make it for good UX.
+<p>My first learning project using C# and took me a week to finish off because I want to make it for good UX.<p/>
 
-
-Also, This is my first time using Visual Studio 2019 Community
+<p>Also, This is my first time using Visual Studio 2019 Community<p/>
