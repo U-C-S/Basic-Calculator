@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Simple-Calculator" Height="340" Width="300" 
+        Title="Basic-Calculator" Height="340" Width="300" 
         ResizeMode="NoResize" WindowStyle="None" Background="#BF000000" AllowsTransparency="True"
         BorderThickness="2,2,2,2" Foreground="{x:Null}" BorderBrush="#E5FFFFFF" KeyDown="Keyboard_press">
 
@@ -37,9 +37,9 @@
     </Window.Resources>
 
     <Grid>
-        <Label Content="Calculator" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" FontSize="16" Height="35" FontFamily="Ink Free" Background="{x:Null}" Foreground="#FF00FFBA"/>
-        <TextBlock x:Name="boxMain" Margin="0,50,0,0" Width="270" Height="18" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" Background="#33000000" Foreground="White" Cursor="Arrow"/>
-        <TextBlock x:Name="boxResult" Margin="0,68,0,0" Width="270" Height="34" Text="0" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" Background="#33000000" Foreground="White" Cursor="Arrow"/>
+        <Label Content="Calculator" VerticalAlignment="Top" FontSize="16" Height="35" FontFamily="Ink Free" Background="{x:Null}" Foreground="#FF00FFBA" Width="75"/>
+        <TextBlock x:Name="boxMain" Margin="0,50,0,0" Width="270" Height="18" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="12" Background="#33000000" Foreground="White"/>
+        <TextBlock x:Name="boxResult" Margin="0,68,0,0" Width="270" Height="34" Text="0" VerticalAlignment="Top" FontSize="18" Background="#33000000" Foreground="White"/>
 
         <Button Content="1" Click="Btn_num" Style="{StaticResource btn}" Margin="10,172,0,0" Background="#CC73D99D" Foreground="White"/>
         <Button Content="2" Click="Btn_num" Style="{StaticResource btn}" Margin="80,172,0,0" Background="#CC73D99D" Foreground="White"/>
@@ -73,29 +73,6 @@
             <Button.Background>
                 <ImageBrush ImageSource="close-window-24.png"/>
             </Button.Background>
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="{x:Null}" />
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border x:Name="Border" Background="{TemplateBinding Background}">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                </Border>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" TargetName="Border" >
-                                            <Setter.Value>
-                                                <ImageBrush ImageSource="close-window-24.png"/>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
         </Button>
 
         <Rectangle HorizontalAlignment="Right" Height="22" Margin="0,5,5,0" VerticalAlignment="Top" Width="22" Panel.ZIndex="2">

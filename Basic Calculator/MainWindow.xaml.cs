@@ -18,17 +18,9 @@ namespace Basic_Calculator
         //UI Events
         private void Draggable(object sender, RoutedEventArgs e) => DragMove();
         private void Close(object sender, RoutedEventArgs e) => Close();
-        private void Btn_num(object sender, RoutedEventArgs e)
-        {
-            Button btn = (Button)sender;
-            NumberFunc(btn.Content.ToString());
-        }
+        private void Btn_num(object sender, RoutedEventArgs e) => NumberFunc((sender as Button).Content.ToString());
         private void Btn_dot(object sender, RoutedEventArgs e) => DotCheck();
-        private void Operator(object sender, RoutedEventArgs e)
-        {
-            Button oper = (Button)sender;
-            CheckandCal(oper.Content.ToString());
-        }
+        private void Operator(object sender, RoutedEventArgs e) => CheckandCal((sender as Button).Content.ToString());
         private void Btn_equal(object sender, RoutedEventArgs e) => TheEnterKey();
         private void Clear(object sender, RoutedEventArgs e) => ClearEverything();
         private void Back(object sender, RoutedEventArgs e) => BackSpace();
@@ -38,17 +30,12 @@ namespace Basic_Calculator
         private void NumberFunc(string i)
         {
             if (boxResult.Text.Length == 1 && boxResult.Text.IndexOf("0") == 0)
-            {
                 boxResult.Text = i;
-            }
             else if (resultShowing)
-            {
                 boxResult.Text = i;
-            }
             else
-            {
                 boxResult.Text += i;
-            }
+
             resultShowing = false;
         }
 
@@ -80,8 +67,7 @@ namespace Basic_Calculator
 
             if (numOp >= 2 && !resultShowing)
             {
-                float num1 = float.Parse(boxResult.Text);
-                TheResult = Calu(TheResult, operStore[numOp - 2], num1);
+                TheResult = Calu(TheResult, operStore[numOp - 2], float.Parse(boxResult.Text));
                 boxResult.Text = $"{TheResult}";
                 resultShowing = true;
             }
