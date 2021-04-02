@@ -10,11 +10,9 @@
 
     <Window.Resources>
         <Style x:Key = "btn" TargetType = "Button">
-            <Setter Property="Height" Value = "35"/>
-            <Setter Property="Width" Value = "65"/>
             <Setter Property="FontSize" Value = "12"/>
-            <Setter Property="HorizontalAlignment" Value ="Left"/>
-            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value ="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
             <Setter Property="BorderBrush" Value="{x:Null}"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Focusable" Value="False"/>
@@ -41,7 +39,25 @@
         <TextBlock x:Name="boxMain" Margin="0,50,0,0" Width="270" Height="18" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="12" Background="#33000000" Foreground="White"/>
         <TextBlock x:Name="boxResult" Margin="0,68,0,0" Width="270" Height="34" Text="0" VerticalAlignment="Top" FontSize="18" Background="#33000000" Foreground="White"/>
 
-        <Button Content="1" Click="Btn_num" Style="{StaticResource btn}" Margin="10,172,0,0" Background="#CC73D99D" Foreground="White"/>
+        <Grid Panel.ZIndex="10" Margin="7,130,7,7" Background="#01FFFF">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Content="1" Click="Btn_num" Style="{StaticResource btn}" Background="#CC73D99D" Foreground="White" Grid.Row="1"/>
+
+        </Grid>
+
         <Button Content="2" Click="Btn_num" Style="{StaticResource btn}" Margin="80,172,0,0" Background="#CC73D99D" Foreground="White"/>
         <Button Content="3" Click="Btn_num" Style="{StaticResource btn}" Margin="150,172,0,0" Background="#CC73D99D" Foreground="White"/>
         <Button Content="4" Click="Btn_num" Style="{StaticResource btn}" Margin="10,212,0,0" Background="#CC73D99D" Foreground="White"/>
@@ -69,11 +85,7 @@
             </Rectangle.Fill>
         </Rectangle>
 
-        <Button Content="" Height="22" Margin="0,5,5,0" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Close" IsCancel="True" Panel.ZIndex="5" Cursor="Hand" Width="22.4" HorizontalAlignment="Right" VerticalAlignment="Top">
-            <Button.Background>
-                <ImageBrush ImageSource="close-window-24.png"/>
-            </Button.Background>
-        </Button>
+        <Button Content="x" Height="22" Margin="0,5,5,0" BorderBrush="{x:Null}" Click="Close" IsCancel="True" Panel.ZIndex="5" Cursor="Hand" Width="22.4" HorizontalAlignment="Right" VerticalAlignment="Top" Background="{x:Null}"/>
 
         <Rectangle HorizontalAlignment="Right" Height="22" Margin="0,5,5,0" VerticalAlignment="Top" Width="22" Panel.ZIndex="2">
             <Rectangle.Fill>
